@@ -27,7 +27,6 @@
     var padding = 30;
 
 
-     //Static dataset
      var dataset = [
      [1, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 3],
      [8, 2], [9, 2], [10, 2], [11, 2], [12, 2], [13, 2], [14, 2],
@@ -35,7 +34,7 @@
      [21, 2],[22, 3],
      ];
 
-    //Create scale functions
+
     var xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) { return d[0]; })])
         .range([padding, w - padding * 2]);
@@ -46,24 +45,21 @@
         .domain([0, d3.max(dataset, function(d) { return d[1]; })])
         .range([2, 5]);
     var formatAsPercentage = d3.format(".1%");
-    //Define X axis
+
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
         .ticks(5);
 
-    //Define Y axis
     var yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(5);
+        .ticks(3);
 
-    //Create SVG element
     var svg = d3.select("body")
         .append("svg")
         .attr("width", w)
         .attr("height", h);
-    //Create circles
 
     svg.selectAll("circle")
         .data(dataset)
@@ -96,7 +92,7 @@
                 return xScale(prevData[0]);
             }
             else {
-                return 0
+                return 0;
             }
         })
         .attr("y2", function(d,i) {
@@ -105,7 +101,7 @@
                 return yScale(prevData[1]);
             }
             else {
-                return 0
+                return 0;
             }
         })
 
@@ -124,12 +120,13 @@
         .call(yAxis);
 
     svg.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 0 - (margin.top / 2))
+        .attr("x", (w / 2)+20)
+        .attr("y", padding)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("text-decoration", "underline")
-        .text("Number of Times ");
+        .text("Frequency of Tooth Brushing");
+
 </script>
 </body>
 </html>
